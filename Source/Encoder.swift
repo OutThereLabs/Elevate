@@ -35,14 +35,14 @@ public class DateEncoder: Encoder {
         self.formatter = dateFormatter
     }
 
-    @available(OSXApplicationExtension 10.12, *)
-    @available(iOSApplicationExtension 10.0, *)
+    @available(OSX 10.12, *)
+    @available(iOS 10.0, *)
     public init(dateFormatter: ISO8601DateFormatter) {
         self.formatter = dateFormatter
     }
 
-    @available(OSXApplicationExtension 10.12, *)
-    @available(iOSApplicationExtension 10.0, *)
+    @available(OSX 10.12, *)
+    @available(iOS 10.0, *)
     public init() {
         self.formatter = ISO8601DateFormatter()
     }
