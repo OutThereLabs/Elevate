@@ -13,7 +13,7 @@ import Foundation
 
  - Validation:      An error that occurs when one or more values fail validation.
  */
-public enum SerializerError: ErrorProtocol, CustomStringConvertible, CustomDebugStringConvertible {
+public enum SerializerError: Error, CustomStringConvertible, CustomDebugStringConvertible {
     case validation(failureReason: String)
 
     /// The failure reason String.
