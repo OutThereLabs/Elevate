@@ -19,8 +19,8 @@ extension JsValue {
 }
 
 public func ==(lhs: JsValue, rhs: JsValue) -> Bool {
-    if lhs.dynamicType == rhs.dynamicType {
-        switch lhs.dynamicType {
+    if type(of: lhs) == type(of: rhs) {
+        switch type(of: lhs) {
         case is JsNull.Type:
             return true
         case is JsBoolean.Type:
@@ -117,7 +117,7 @@ public class JsArray: JsValue {
 }
 
 public class JsObject: JsValue {
-    private let underlying: [String: JsValue]
+    let underlying: [String: JsValue]
 
     public init(_ value: [String: JsValue]) {
         self.underlying = value

@@ -67,7 +67,7 @@ public class StringToIntDecoder: Decoder {
     public func decodeObject(_ object: AnyObject) throws -> Any {
         if let
             intString = object as? String,
-            intValue = Int(intString)
+            let intValue = Int(intString)
         {
             return intValue
         }

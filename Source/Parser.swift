@@ -140,7 +140,7 @@ public class Parser {
             let options = JSONSerialization.ReadingOptions(rawValue: 0)
             let json = try JSONSerialization.jsonObject(with: data, options: options)
 
-            result = try parseProperties(json: json, closure: closure)
+            result = try parseProperties(json: json as AnyObject, closure: closure)
         } catch {
             if error is ParserError {
                 throw error
@@ -211,19 +211,19 @@ public class Parser {
                     parsedValue = jsonValue
                     parsed[property.keyPath] = jsonValue
                 case .uInt:
-                    parsedValue = (jsonValue as! NSNumber).uintValue
+                    parsedValue = (jsonValue as! NSNumber).uintValue as AnyObject
                     parsed[property.keyPath] = parsedValue
                 case .int:
-                    parsedValue = (jsonValue as! NSNumber).intValue
+                    parsedValue = (jsonValue as! NSNumber).intValue as AnyObject
                     parsed[property.keyPath] = parsedValue
                 case .float:
-                    parsedValue = (jsonValue as! NSNumber).floatValue
+                    parsedValue = (jsonValue as! NSNumber).floatValue as AnyObject
                     parsed[property.keyPath] = parsedValue
                 case .double:
-                    parsedValue = (jsonValue as! NSNumber).doubleValue
+                    parsedValue = (jsonValue as! NSNumber).doubleValue as AnyObject
                     parsed[property.keyPath] = parsedValue
                 case .bool:
-                    parsedValue = (jsonValue as! NSNumber).boolValue
+                    parsedValue = (jsonValue as! NSNumber).boolValue as AnyObject
                     parsed[property.keyPath] = parsedValue
                 case .array:
                     if let decodingMethod = property.decodingMethod {
@@ -245,7 +245,7 @@ public class Parser {
                         let description = "Required key path [\(property.keyPath)] could not be parsed to valid URL"
                         parsingErrorDescriptions.append(description)
                     } else {
-                        parsedValue = url
+                        parsedValue = url as AnyObject
                         parsed[property.keyPath] = url
                     }
                 }
@@ -290,7 +290,7 @@ public class Parser {
         }
 
         let property = propertyMaker.properties.first!
-        let jsonValue: AnyObject = array
+        let jsonValue: AnyObject = array as AnyObject
 
         if let decodingMethod = property.decodingMethod {
             let result = try parseArray(data: jsonValue, decodingMethod: decodingMethod)
@@ -335,7 +335,7 @@ public class Parser {
     // MARK: Private - Parser Helper Methods
 
     private class func json(_ dictionary: [String: AnyObject], forKeyPath keypath: String) -> AnyObject {
-        var json: AnyObject? = dictionary
+        var json: AnyObject? = dictionary as AnyObject
 
         if dictionary.keys.contains(keypath) {
             json = dictionary[keypath]
