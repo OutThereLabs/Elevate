@@ -22,11 +22,11 @@ public class Serializer {
         }
     }
 
-    public class func serializeObject<T, E : Encoder where E.EncodeeType == T>(object: T, withEncoder encoder: E) -> Data {
+    public class func serializeObject<T, E : Encoder>(object: T, withEncoder encoder: E) -> Data where E.EncodeeType == T {
         return serializeJSON(encoder.encodeObject(object))
     }
 
-    public class func serializeObject<T, E : Encoder where E.EncodeeType == T>(object: T, withKey key: String, withEncoder encoder: E) -> Data {
+    public class func serializeObject<T, E : Encoder>(object: T, withKey key: String, withEncoder encoder: E) -> Data where E.EncodeeType == T {
         if key == "" {
             return serializeObject(object: object, withEncoder: encoder)
         } else {
