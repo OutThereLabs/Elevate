@@ -31,25 +31,25 @@ extension String: Encodable {
 
 extension Int: Encodable {
     public func toJSON() -> JsValue {
-        return JsNumber(self)
+        return JsNumber(NSNumber(value: self))
     }   
 }
 
 extension UInt: Encodable {
     public func toJSON() -> JsValue {
-        return JsNumber(self)
+        return JsNumber(NSNumber(value: self))
     }
 }
 
 extension Float: Encodable {
     public func toJSON() -> JsValue {
-        return JsNumber(self)
+        return JsNumber(NSNumber(value: self))
     }
 }
 
 extension Double: Encodable {
     public func toJSON() -> JsValue {
-        return JsNumber(self)
+        return JsNumber(NSNumber(value: self))
     }
 }
 
