@@ -47,7 +47,7 @@ public class DateEncoder: Encoder {
         self.formatter = ISO8601DateFormatter()
     }
 
-    public func encodeObject(_ data: Date) -> JsValue {
-        return JsString(formatter.string(for: data)!)
+    public func encodeObject(_ date: Date) -> JsValue {
+        return JsString(formatter.string(for: date)!)
     }
 }
