@@ -10,11 +10,12 @@ import Foundation
 
 public protocol JsValue: AnyObject {
     func toString() -> String
+    func toValue() -> AnyObject
 }
 
 extension JsValue {
     public func data() throws -> Data {
-        return try JSONSerialization.data(withJSONObject: self, options: [])
+        return try JSONSerialization.data(withJSONObject: self.toValue(), options: [])
     }
 }
 
@@ -63,6 +64,10 @@ public class JsNull: JsValue {
     public func toString() -> String {
         return "null"
     }
+
+    public func toValue() -> AnyObject {
+        return "null" as NSString
+    }
 }
 
 public class JsBoolean: JsValue {
@@ -74,6 +79,10 @@ public class JsBoolean: JsValue {
 
     public func toString() -> String {
         return value ? "true" : "false"
+    }
+
+    public func toValue() -> AnyObject {
+        return NSNumber(booleanLiteral: value)
     }
 }
 
@@ -87,6 +96,10 @@ public class JsNumber: JsValue {
     public func toString() -> String {
         return "\(value)"
     }
+
+    public func toValue() -> AnyObject {
+        return value
+    }
 }
 
 public class JsString: JsValue {
@@ -98,6 +111,10 @@ public class JsString: JsValue {
 
     public func toString() -> String {
         return "\"\(value)\""
+    }
+
+    public func toValue() -> AnyObject {
+        return value as NSString
     }
 }
 
@@ -113,6 +130,10 @@ public class JsArray: JsValue {
             return jsValue.toString()
         }).joined(separator: ",")
         return "[\(valueStrings)]"
+    }
+
+    public func toValue() -> AnyObject {
+        return value.map { $0.toValue() } as NSArray
     }
 }
 
@@ -136,5 +157,15 @@ public class JsObject: JsValue {
 
 
         return "{\(jsonString)}"
+    }
+
+    public func toValue() -> AnyObject {
+        var dictionary = [String: AnyObject]()
+
+        for (key, value) in underlying {
+            dictionary[key] = value.toValue()
+        }
+
+        return dictionary as NSDictionary
     }
 }
