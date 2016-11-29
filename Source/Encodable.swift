@@ -58,3 +58,9 @@ extension Bool: Encodable {
         return JsBoolean(self)
     }
 }
+
+extension NSNull: Encodable {
+    public func toJSON() -> JsValue {
+        return JsNull()
+    }
+}

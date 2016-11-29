@@ -51,7 +51,7 @@ class SerializerTests: BaseTestCase {
         let model = TestModelWithEncoding(name: "Test Name")
 
         // When
-        let json = Serializer.serializeObject(object: model)
+        let json = try? Serializer.serializeObject(object: model)
 
         // Then
         XCTAssertEqual(json, "{\"name\":\"\(model.name)\"}".data(using: .utf8), "Encoded model did not equal json string")
@@ -63,7 +63,7 @@ class SerializerTests: BaseTestCase {
         let encoder = TestModelEncoder()
 
         // When
-        let json = Serializer.serializeObject(object: model, withEncoder: encoder)
+        let json = try? Serializer.serializeObject(object: model, withEncoder: encoder)
 
         // Then
         XCTAssertEqual(json, "{\"name\":\"\(model.name)\"}".data(using: .utf8), "Encoded model with encoder did not equal json value")

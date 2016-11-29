@@ -61,12 +61,16 @@ public func ==(lhs: JsValue, rhs: JsValue) -> Bool {
 public func !=(lhs: JsValue, rhs: JsValue) -> Bool { return !(lhs == rhs) }
 
 public class JsNull: JsValue {
+    let value = NSNull()
+    
+    public init() {}
+    
     public func toString() -> String {
         return "null"
     }
 
     public func toValue() -> AnyObject {
-        return "null" as NSString
+        return value
     }
 }
 
